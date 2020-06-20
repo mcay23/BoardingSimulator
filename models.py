@@ -1,11 +1,8 @@
 import numpy as np
 
-walk_tick = 1
-store_tick = 2
-
 
 class Node:
-    def __init__(self, order, dest_row, dest_aisle):
+    def __init__(self, order, dest_row, dest_aisle, wait_tick=5):
         self.dest_row = dest_row
         if dest_aisle == 0:
             self.dest_aisle = "A"
@@ -20,7 +17,8 @@ class Node:
         elif dest_aisle == 5:
             self.dest_aisle = "F"
 
-        self.tick = 2
+        self.node_tick = 0
+        self.wait_tick = wait_tick
         # order of entry, decrements as people board front
         self.pos = -1 * order - 1
         self.aisle_pos = "Q"
@@ -28,6 +26,7 @@ class Node:
 
 class Model:
     """Class to hold different plane models"""
+
     def __init__(self, model_name):
         if model_name == "737":
             self.model = "737"
@@ -41,7 +40,6 @@ class Model:
         self.seats = np.full((self.i + self.j, self.rows), 0)
         self.queue = np.full(self.rows, 0)
         self.state = self.seats
-
 
     def print(self):
         print(self.str())
