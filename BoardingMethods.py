@@ -197,6 +197,41 @@ def SteffenOptimal():
     return createNodes(list)
 
 
+def SteffenModified():
+    # Every other row left, Every other row right, then rest of left and right
+    group1 = []
+    group2 = []
+    group3 = []
+    group4 = []
+    for i in range(0, 30, 2):
+        group1.append((0, i))
+        group1.append((1, i))
+        group1.append((2, i))
+
+    for i in range(1, 30, 2):
+        group2.append((3, i))
+        group2.append((4, i))
+        group2.append((5, i))
+
+    for i in range(1, 30, 2):
+        group3.append((0, i))
+        group3.append((1, i))
+        group3.append((2, i))
+
+    for i in range(0, 30, 2):
+        group4.append((3, i))
+        group4.append((4, i))
+        group4.append((5, i))
+
+    random.shuffle(group1)
+    random.shuffle(group2)
+    random.shuffle(group3)
+    random.shuffle(group4)
+
+    list = group1 + group2 + group3 + group4
+    return createNodes(list)
+
+
 def SimulationOptimal():
     list = []
     for i in range(0, 3):

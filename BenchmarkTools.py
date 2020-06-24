@@ -4,7 +4,7 @@ import BoardingSimulator
 import models
 
 types = ["Random", "WindowMA", "WMAGroups", "BackToFront",
-         "FrontToBack", "SteffenOptimal", "SimulationOptimal"]
+         "FrontToBack", "SteffenOptimal", "SteffenModified", "SimulationOptimal"]
 
 
 def benchmark(bench_type, iter=10):
@@ -29,6 +29,8 @@ def benchmark(bench_type, iter=10):
             nodes = BoardingMethods.FrontToBack()
         elif bench_type == "SteffenOptimal":
             nodes = BoardingMethods.SteffenOptimal()
+        elif bench_type == "SteffenModified":
+            nodes = BoardingMethods.SteffenModified()
         elif bench_type == "SimulationOptimal":
             nodes = BoardingMethods.SimulationOptimal()
 
@@ -54,6 +56,7 @@ def benchmark(bench_type, iter=10):
     print("max-node: " +
           str(max(node_ticks)) + " ticks.")
     print()
+    return node_ticks
 
 
 def write(bench_type, file_name="out.txt"):
@@ -70,13 +73,15 @@ def write(bench_type, file_name="out.txt"):
         nodes = BoardingMethods.FrontToBack()
     elif bench_type == "SteffenOptimal":
         nodes = BoardingMethods.SteffenOptimal()
+    elif bench_type == "SteffenModified":
+        nodes = BoardingMethods.SteffenModified()
     elif bench_type == "SimulationOptimal":
         nodes = BoardingMethods.SimulationOptimal()
     else:
         print("Invalid benchmark type")
         return 0
 
-    open('out.txt', 'w').close()
+    open(file_name, 'w').close()
     text_file = open(file_name, "a")
     ticks_elapsed = 0
     while isDone(nodes) == 0:
