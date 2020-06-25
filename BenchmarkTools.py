@@ -22,7 +22,7 @@ def benchmark(bench_type, iter=10):
         elif bench_type == "WindowMA":
             nodes = BoardingMethods.WindowMA()
         elif bench_type == "WMAGroups":
-            nodes = BoardingMethods.WindowMA()
+            nodes = BoardingMethods.WMAGroups()
         elif bench_type == "BackToFront":
             nodes = BoardingMethods.BackToFront()
         elif bench_type == "FrontToBack":
